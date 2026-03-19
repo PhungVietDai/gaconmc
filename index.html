@@ -591,37 +591,35 @@
             }
         }
 
-        .filter-mini {
-            display: flex;
-            gap: 5px;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .filter-mini input {
-            padding: 4px 6px;
-            font-size: 11px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            width: 110px;
-        }
-
         .filter-mini button {
-            padding: 4px 8px;
-            font-size: 11px;
-            border-radius: 6px;
+            padding: 6px 12px;
             border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
             cursor: pointer;
-            background: linear-gradient(90deg, #00f2fe, #4facfe);
-            color: black;
-            font-weight: bold;
+            transition: 0.3s;
         }
 
-        .filter-mini button:last-child {
-            background: #777;
-            color: white;
+        /* Nút Lọc */
+        .filter-mini button:first-of-type {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #000;
+        }
+
+        .filter-mini button:first-of-type:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Nút Reset */
+        .filter-mini button:last-of-type {
+            background: linear-gradient(135deg, #ff4fd8, #ff6a6a);
+            color: #fff;
+        }
+
+        .filter-mini button:last-of-type:hover {
+            transform: rotate(90deg) scale(1.1);
         }
     </style>
 </head>
@@ -1089,7 +1087,7 @@
     </script>
     <div class="footer">
         © 2026 Love with Ken . Được thiết kế<br>
-        và phát triển bở <span>Kenday ❤️</span>
+        và phát triển bở <span>Ken❤️</span>
     </div>
 </body>
 
