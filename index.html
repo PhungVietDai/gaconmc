@@ -621,6 +621,53 @@
         .filter-mini button:last-of-type:hover {
             transform: rotate(90deg) scale(1.1);
         }
+
+        #pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        #pagination button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* hover đẹp */
+        #pagination button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        /* nút active */
+        #pagination button.active {
+            background: linear-gradient(135deg, #ff4fd8, #ff6a6a);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 79, 216, 0.4);
+        }
+
+        /* text trang */
+        #pageInfo {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: bold;
+        }
+
+        .filtered-out {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -962,6 +1009,11 @@
                         </tr>
                     </tbody>
                 </table>
+                <div id="pagination">
+                    <button onclick="prevPage()">⬅</button>
+                    <span id="pageInfo">Trang 1</span>
+                    <button onclick="nextPage()">➡</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1127,7 +1179,7 @@
             let end = document.getElementById("endDate").value;
 
             if (!start || !end) {
-                alert("Chọn đầy đủ ngày bắt đầu và kết thúc!");
+                alert("Chọn đầy đủ ngày!");
                 return;
             }
 
@@ -1139,12 +1191,14 @@
                 let rowDate = parseDate(timeText);
 
                 if (rowDate >= startDate && rowDate <= endDate) {
-                    row.style.display = "";
+                    row.classList.remove("filtered-out");
                 } else {
-                    row.style.display = "none";
+                    row.classList.add("filtered-out");
                 }
             });
 
+            currentPage = 1;
+            showPage(currentPage);
             calcTotalFiltered();
         }
 
@@ -1168,16 +1222,58 @@
 
         function resetFilter() {
             document.querySelectorAll(".history-table tbody tr").forEach(row => {
-                row.style.display = "";
+                row.classList.remove("filtered-out");
             });
 
             document.getElementById("startDate").value = "";
             document.getElementById("endDate").value = "";
 
-            document.addEventListener("DOMContentLoaded", () => {
-                calcTotal();
-            }); // về lại tổng ban đầu
+            currentPage = 1;
+            showPage(currentPage);
+            calcTotal();
         }
+        let currentPage = 1;
+        const rowsPerPage = 10;
+
+        function showPage(page) {
+            const allRows = document.querySelectorAll(".history-table tbody tr");
+
+            const rows = Array.from(allRows)
+                .filter(row => !row.classList.contains("filtered-out"));
+
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            allRows.forEach(row => row.style.display = "none");
+
+            rows.slice(start, end).forEach(row => {
+                row.style.display = "";
+            });
+
+            document.getElementById("pageInfo").innerText = "Trang " + page;
+        }
+
+        function nextPage() {
+            const rows = document.querySelectorAll(".history-table tbody tr");
+            const maxPage = Math.ceil(rows.length / rowsPerPage);
+
+            if (currentPage < maxPage) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+
+        // chạy lần đầu
+        document.addEventListener("DOMContentLoaded", () => {
+            showPage(currentPage);
+        });
     </script>
     <div class="footer">
         © 2026 Love with Ken . Được thiết kế<br>
