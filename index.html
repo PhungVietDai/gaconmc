@@ -736,7 +736,7 @@
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th id="totalMoney" style="color:#00ffcc;">Tổng: 0đ</th>
+                            <th id="totalMoney" style="color:#00ffcc;">Tổng: 0đ | 0 giao dịch</th>
                             <th></th>
                             <th></th>
                             <th colspan="2" style="text-align:right;">
@@ -944,7 +944,7 @@
                             <td>Chuyển Khoản</td>
                             <td>50.000đ</td>
                             <td>05/01/2026 15:55</td>
-                            <td class="status-success">Thành công</td> 
+                            <td class="status-success">Thành công</td>
                         </tr>
                         <tr>
                             <td>Ẩn Danh</td>
@@ -1100,14 +1100,18 @@
         });
         function calcTotal() {
             let total = 0;
+            let count = 0;
+
             document.querySelectorAll(".history-table tbody tr").forEach(row => {
-                let moneyText = row.children[2].innerText; // cột Mệnh giá
-                let number = parseInt(moneyText.replace(/\D/g, ""));
+                let moneyText = row.children[2]?.innerText || "0";
+                let number = parseInt(moneyText.replace(/\D/g, "")) || 0;
+
                 total += number;
+                count++;
             });
 
             document.getElementById("totalMoney").innerText =
-                "Tổng: " + total.toLocaleString() + "đ";
+                "Tổng: " + total.toLocaleString() + "đ | " + count + " lần giao dịch";
         }
 
         calcTotal();
@@ -1146,16 +1150,20 @@
 
         function calcTotalFiltered() {
             let total = 0;
+            let count = 0;
+
             document.querySelectorAll(".history-table tbody tr").forEach(row => {
                 if (row.style.display === "none") return;
 
-                let moneyText = row.children[2].innerText;
-                let number = parseInt(moneyText.replace(/\D/g, ""));
+                let moneyText = row.children[2]?.innerText || "0";
+                let number = parseInt(moneyText.replace(/\D/g, "")) || 0;
+
                 total += number;
+                count++;
             });
 
             document.getElementById("totalMoney").innerText =
-                "Tổng: " + total.toLocaleString() + "đ";
+                "Tổng: " + total.toLocaleString() + "đ | " + count + " giao dịch";
         }
 
         function resetFilter() {
@@ -1166,7 +1174,9 @@
             document.getElementById("startDate").value = "";
             document.getElementById("endDate").value = "";
 
-            calcTotal(); // về lại tổng ban đầu
+            document.addEventListener("DOMContentLoaded", () => {
+                calcTotal();
+            }); // về lại tổng ban đầu
         }
     </script>
     <div class="footer">
