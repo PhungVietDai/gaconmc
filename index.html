@@ -4,133 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GACONMC | Server Minecraft</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/ZRrz3xv7/avatargcmc.png">
-
-    <link rel="stylesheet" href="luat.css">
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Fira+Code&family=Lexend:wght@300;400;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <title>Donate Ủng Hộ Server</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #64ffda;
-            --bg-glass: rgba(17, 19, 23, 0.7);
-            --border: rgba(255, 255, 255, 0.1);
-            --text: #e6edf3;
-            --text-dim: #8b949e;
-            --transition: all 0.3s ease;
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --accent: #f093fb;
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', "Segoe UI", sans-serif;
         }
 
         body {
-            background-image: url('nengif2.gif');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text);
-            font-family: 'Lexend', sans-serif;
             min-height: 100vh;
+            background: url("nengif.gif") center/cover no-repeat;
+
+            display: flex;
+            flex-direction: column;
+            /* 🔥 thêm */
+
+            align-items: center;
+            padding: 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* --- MENU TOP STYLE --- */
+        .nav-container {
+            position: fixed;
+            top: 15px;
+            width: 95%;
+            max-width: 900px;
+            background: rgba(30, 30, 60, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            z-index: 10000;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-logo {
             display: flex;
             align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: white;
         }
 
-        .container {
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            gap: 30px;
-            width: 100%;
-            height: 85vh;
-            /* Cố định chiều cao khung tổng */
-        }
-
-        /* SIDEBAR */
-        .sidebar {
-            flex: 0 0 280px;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px 20px;
-            text-align: center;
-            overflow-y: auto;
-            /* Cho phép cuộn menu nếu nhiều luật */
-        }
-
-        .avatar {
-            width: 80px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            padding: 4px;
-            margin-bottom: 15px;
+        .nav-logo img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
         }
 
         .nav-menu {
-            list-style: none;
-            margin-top: 20px;
-            text-align: left;
+            display: flex;
+            gap: 15px;
         }
 
         .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            color: var(--text-dim);
-            text-decoration: none;
-            border-radius: 8px;
-            transition: var(--transition);
-            font-size: 0.85rem;
-            margin-bottom: 5px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
             cursor: pointer;
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            color: var(--primary);
-            background: rgba(100, 255, 218, 0.1);
-        }
-
-        /* CONTENT AREA */
-        .content {
-            flex: 1;
+            transition: 0.3s;
+            padding: 5px 0;
             position: relative;
-            height: 100%;
+            text-transform: uppercase;
         }
 
-        .tab-content {
-            display: none;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 35px;
-            height: 100%;
-            /* Luôn cao bằng container */
-            overflow-y: auto;
-            /* Cuộn nội dung bên trong nếu quá dài */
-            animation: fadeIn 0.4s ease-out;
+        .nav-item.active {
+            color: #ff4fd8;
         }
 
-        .tab-content.active {
-            display: block;
+        .nav-item.active::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ff4fd8;
+        }
+
+        /* --- LAYOUT CHÍNH --- */
+        .main-tab-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 85px;
+            animation: fadeIn 0.8s ease-out;
+
+            flex: 1;
+            /* 🔥 thêm dòng này */
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .main {
+            max-width: 1100px;
+            transform-origin: top center;
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 25px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            color: white;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
 
             to {
@@ -139,260 +154,1140 @@
             }
         }
 
-        /* PHẦN TRANG TRÍ DASHBOARD */
-        .tag {
-            font-family: 'Fira Code';
-            color: var(--primary);
-            font-size: 0.7rem;
-            margin-bottom: 10px;
-            display: block;
+        /* LEFT SIDE */
+        .left {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .stat-card {
-            background: rgba(100, 255, 218, 0.05);
-            border: 1px solid var(--border);
-            padding: 15px;
+        .avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            animation: rotateGlow 4s linear infinite;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a1a1a;
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                filter: drop-shadow(0 0 5px var(--primary));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px var(--accent));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 5px var(--primary));
+            }
+        }
+
+        .profile-info h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(0, 255, 204, 0.2);
+            color: #00ffcc;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .box {
+            padding: 12px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .social-item {
+            width: 55px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: 0.3s ease;
+        }
+
+        .social-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .facebook:hover {
+            color: #1877f2;
+        }
+
+        .tiktok:hover {
+            color: #ff0050;
+        }
+
+        .discord:hover {
+            color: #5865f2;
+        }
+
+        /* RIGHT SIDE */
+        .right {
+            flex: 1.5;
+            min-width: 300px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px;
             border-radius: 12px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--secondary), #6a11cb);
+            color: white;
+        }
+
+        .card {
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+        }
+
+        .qr-wrapper {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .qr-container {
+            position: relative;
+            display: inline-block;
+            width: 180px;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 12px;
+            padding: 5px;
+            background: white;
+        }
+
+        .qr-container img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .qr-container:hover {
+            transform: scale(1.08) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 242, 254, 0.3);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+
+        .btn-copy {
+            background: var(--secondary);
+            border: none;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .donate-msg {
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 242, 254, 0.1);
+            border-left: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.85rem;
             text-align: center;
         }
 
-        .copy-btn {
-            margin-top: 20px;
+        .input-style {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: white;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .row-2 {
+            display: flex;
+            gap: 10px;
+        }
+
+        .row-2 .input-style {
+            flex: 1;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* --- TABLE LỊCH SỬ --- */
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+
+        .history-table th {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--primary);
+        }
+
+        .history-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .status-success {
+            color: #00ffcc;
+        }
+
+        /* MUSIC PLAYER */
+        .music-player {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            background: var(--primary);
-            color: #111;
-            padding: 12px 20px;
+            gap: 12px;
+            padding: 10px 15px;
+            border-radius: 16px;
+            background: rgba(30, 30, 60, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            color: white;
+            z-index: 9999;
+            min-width: 220px;
+        }
+
+        .music-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #ff4fd8;
+            animation: spin 5s linear infinite;
+            animation-play-state: paused;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .music-info {
+            flex: 1;
+        }
+
+        .music-title {
+            font-weight: bold;
+            font-size: 13px;
+            color: #ff4fd8;
+        }
+
+        .music-sub {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* MODAL & TOAST */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 20000;
+            padding: 20px;
+        }
+
+        .modal img {
+            max-width: 100%;
+            max-height: 80vh;
             border-radius: 10px;
+            box-shadow: 0 0 40px var(--primary);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: 0.4s;
+            z-index: 20001;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 650px) {
+            .main {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .left,
+            .right {
+                min-width: 100%;
+            }
+
+            .nav-container {
+                width: 92%;
+                padding: 8px 12px;
+            }
+
+            .nav-logo span {
+                display: none;
+            }
+        }
+
+        .music-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #ff4fd8;
+            background: #111;
+            /* tránh đen trống */
+        }
+
+        .music-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- FOOTER STYLE --- */
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.4);
+            /* Màu chữ xám mờ */
+            font-size: 0.85rem;
+            line-height: 1.6;
+            z-index: 10;
+        }
+
+        .footer span {
+            color: #ff4fd8;
+            /* Màu hồng cho trái tim hoặc tên */
+        }
+
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        .footer span {
+            color: #ff4fd8;
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                transform: none;
+                /* 🔥 bắt buộc */
+            }
+        }
+
+        .filter-mini button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .copy-btn:hover {
+        /* Nút Lọc */
+        .filter-mini button:first-of-type {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #000;
+        }
+
+        .filter-mini button:first-of-type:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
         }
 
-        .player-tag {
+        /* Nút Reset */
+        .filter-mini button:last-of-type {
+            background: linear-gradient(135deg, #ff4fd8, #ff6a6a);
+            color: #fff;
+        }
+
+        .filter-mini button:last-of-type:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        #pagination {
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 6px;
-            background: rgba(100, 255, 218, 0.1);
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(100, 255, 218, 0.2);
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .player-head {
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
+        #pagination button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* hover đẹp */
+        #pagination button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        /* nút active */
+        #pagination button.active {
+            background: linear-gradient(135deg, #ff4fd8, #ff6a6a);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 79, 216, 0.4);
+        }
+
+        /* text trang */
+        #pageInfo {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: bold;
+        }
+
+        .filtered-out {
+            display: none !important;
         }
     </style>
 </head>
 
 <body>
-    <div class="menu-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
+
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="https://i.ibb.co/ZRrz3xv7/avatargcmc.png">
+            <span>DONATE ỦNG HỘ CHÉN CƠM</span>
+        </div>
+        <div class="nav-menu">
+            <div class="nav-item active" onclick="switchMainTab('page-home', this)">TRANG CHỦ</div>
+            <div class="nav-item" onclick="switchMainTab('page-history', this)">LỊCH SỬ</div>
+            <div class="nav-item" onclick="switchMainTab('page-guide', this)">HƯỚNG DẪN</div>
+            <div class="nav-item" onclick="switchMainTab('page-about', this)">GIỚI THIỆU</div>
+        </div>
     </div>
-    <div class="container">
-        <aside class="sidebar">
-            <img src="https://i.ibb.co/ZRrz3xv7/avatargcmc.png" class="avatar">
-            <h3 style="font-size: 1.1rem;">Gà Con MC</h3>
-            <p style="font-size: 0.75rem; color: var(--primary); letter-spacing: 1px;">SURVIVAL CHILL</p>
 
-            <nav class="nav-menu">
-                <div class="nav-item active" onclick="openTab(event, 'intro')"><i class="fas fa-home"></i> Giới thiệu
-                </div>
-                <div class="nav-item" onclick="openTab(event, 'rule1')"><i class="fas fa-gavel"></i> Luật I. Sở hữu trí
-                    tuệ
-                </div>
-                <div class="nav-item" onclick="openTab(event, 'rule2')"><i class="fas fa-gavel"></i> Luật II. Giao
-                    thương - Economy Policy</div>
-                <div class="nav-item" onclick="openTab(event, 'rule3')"><i class="fas fa-gavel"></i> Luật III. Quảng cáo
-                    - Tiếp thị
-                </div>
-            </nav>
-        </aside>
-
-        <main class="content">
-            <section id="intro" class="tab-content active">
-                <span class="tag">>_ TRẠNG THÁI HIỆN THỊ TRỰC TẾ TRONG SERVER</span>
-                <h2 style="margin-bottom: 20px;"><i class="fas fa-rocket" style="color: var(--primary);"></i> GaConMC
-                </h2>
-
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px;">
-                    <div class="stat-card">
-                        <i class="fas fa-signal" id="status-icon" style="margin-bottom: 8px;"></i>
-                        <div style="font-size: 0.65rem; color: var(--text-dim);">TRẠNG THÁI</div>
-                        <div id="server-status" style="font-size: 0.9rem; font-weight: 800;">ĐANG TẢI...</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-users" style="color: var(--primary); margin-bottom: 8px;"></i>
-                        <div style="font-size: 0.65rem; color: var(--text-dim);">ONLINE</div>
-                        <div id="player-count" style="font-size: 0.9rem; font-weight: 800;">- / -</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-microchip" style="color: var(--primary); margin-bottom: 8px;"></i>
-                        <div style="font-size: 0.65rem; color: var(--text-dim);">PHIÊN BẢN</div>
-                        <div id="server-version" style="font-size: 0.8rem; font-weight: 800;">...</div>
-                    </div>
-                </div>
-
-                <div
-                    style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 15px; border: 1px solid var(--border); margin-bottom: 20px;">
-                    <h4
-                        style="font-size: 0.8rem; color: var(--primary); font-family: 'Fira Code'; margin-bottom: 10px;">
-                        >_ MOTD:</h4>
-                    <div id="motd-text" style="font-size: 0.85rem; font-family: 'Fira Code'; color: #ccc;">Đang kết
-                        nối...</div>
-                </div>
-
-                <div
-                    style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 15px; border: 1px solid var(--border);">
-                    <h4 style="font-size: 0.8rem; color: var(--primary); margin-bottom: 10px;"><i
-                            class="fas fa-users-viewfinder"></i> THÀNH VIÊN ONLINE:</h4>
-                    <div id="player-list" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                </div>
-
-                <div class="copy-btn" onclick="copyIP()">
-                    <span><i class="fas fa-terminal"></i> IP: gaconmc.ddns.net:25793</span>
-                    <span style="font-size: 0.7rem; font-weight: 800;">SAO CHÉP</span>
-                </div>
-            </section>
-
-            <section id="rule1" class="tab-content rule-page">
-                <span class="tag">>_ HỆ THỐNG LIÊN KẾT CỘNG ĐỒNG</span>
-
-                <div class="discord-banner-bar">
-                    <div class="dis-info">
-                        <div class="dis-title">
-                            <i class="fab fa-discord"></i> THAM GIA DISCORD
-                        </div>
-                        <div class="dis-subtitle">
-                            Cập nhật tin tức nhanh nhất và giao lưu cùng cộng đồng.
+    <div id="page-home" class="main-tab-content">
+        <div class="main">
+            <div class="left">
+                <div class="profile-info">
+                    <div class="avatar-wrapper">
+                        <div class="avatar">
+                            <img src="https://i.ibb.co/8gqJHJbf/kenn.jpg" alt="Ken">
                         </div>
                     </div>
-                    <a href="https://discord.com/channels/1392510100240859216/1489522592732811434" target="_blank"
-                        class="dis-btn-white">
-                        THAM GIA NGAY
-                    </a>
-                </div>
-            </section>
-            <section id="rule2" class="tab-content rule-page">
-                <span class="tag">>_ HỆ THỐNG LIÊN KẾT CỘNG ĐỒNG</span>
-
-                <div class="discord-banner-bar">
-                    <div class="dis-info">
-                        <div class="dis-title">
-                            <i class="fab fa-discord"></i> THAM GIA DISCORD
-                        </div>
-                        <div class="dis-subtitle">
-                            Cập nhật tin tức nhanh nhất và giao lưu cùng cộng đồng.
-                        </div>
+                    <div style="margin-top: 12px;">
+                        <span class="status-badge">● Đang hoạt động</span>
+                        <h2>Ken Đây</h2>
+                        <p style="color: rgba(255,255,255,0.4); font-size: 0.75rem;">14/09/2007</p>
                     </div>
-                    <a href="https://discord.com/channels/1392510100240859216/1489564467304861757" target="_blank"
-                        class="dis-btn-white">
-                        THAM GIA NGAY
-                    </a>
                 </div>
-            </section>
-            <section id="rule3" class="tab-content rule-page">
-                <span class="tag">>_ HỆ THỐNG LIÊN KẾT CỘNG ĐỒNG</span>
+                <div class="box"><i class="fas fa-heart" style="color: #ff4d4d;"></i> Cảm ơn bạn đã ủng hộ!<br>Thank
+                    Kìuu 💖</div>
+                <div class="box" style="color: #00ffcc; border-color: rgba(0, 255, 204, 0.2);">"I LOVE YOU 💖"</div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61583406227766" target="_blank"
+                        class="social-item facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.tiktok.com/@kenmatmun" target="_blank" class="social-item tiktok"><i
+                            class="fab fa-tiktok"></i></a>
+                    <a href="https://discord.gg/gg4gBWQ4" target="_blank" class="social-item discord"><i
+                            class="fab fa-discord"></i></a>
+                </div>
+            </div>
 
-                <div class="discord-banner-bar">
-                    <div class="dis-info">
-                        <div class="dis-title">
-                            <i class="fab fa-discord"></i> THAM GIA DISCORD
-                        </div>
-                        <div class="dis-subtitle">
-                            Cập nhật tin tức nhanh nhất và giao lưu cùng cộng đồng.
-                        </div>
-                    </div>
-                    <a href="https://discord.com/channels/1392510100240859216/1489584388239785994" target="_blank"
-                        class="dis-btn-white">
-                        THAM GIA NGAY
-                    </a>
+            <div class="right">
+                <div class="tabs">
+                    <div class="tab active" onclick="showTab('bank', this)">💳 Chuyển khoản</div>
+                    <div class="tab" onclick="showTab('card', this)">🎮 Thẻ cào</div>
                 </div>
-            </section>
-        </main>
+
+                <div id="bank" class="card">
+                    <div class="qr-wrapper">
+                        <div class="qr-container" onclick="openQR('https://i.ibb.co/1Y4Ph9JQ/image.png')">
+                            <img src="https://i.ibb.co/1Y4Ph9JQ/image.png" alt="QR Code">
+                        </div>
+                        <span
+                            style="display:block; margin-top:8px; font-size:0.75rem; color:var(--primary); font-style:italic;"><i
+                                class="fas fa-search-plus"></i> Bấm để phóng to ảnh</span>
+                    </div>
+                    <div class="info-list">
+                        <div class="info-row"><span style="opacity:0.6">Ngân hàng</span><span
+                                style="font-weight:600">Techcombank</span></div>
+                        <div class="info-row"><span style="opacity:0.6">STK</span>
+                            <div><span id="stk" style="font-family:monospace; font-weight:bold;">7962833514</span>
+                                <button class="btn-copy" onclick="copySTK()">Copy</button>
+                            </div>
+                        </div>
+                        <div class="info-row"><span style="opacity:0.6">Chủ TK</span><span style="font-weight:600">PHUNG
+                                VIET DAI</span></div>
+                    </div>
+                    <div class="donate-msg">NỘI DUNG: DONATE [ TÊN GAME ]</div>
+                </div>
+
+                <div id="card" class="card hidden">
+                    <select id="telco" class="input-style">
+                        <option value="VIETTEL">Viettel</option>
+                        <option value="VINAPHONE">Vinaphone</option>
+                        <option value="MOBIFONE">Mobifone</option>
+                        <option value="ZING">Thẻ Zing</option>
+                        <option value="GARENA">Garena</option>
+                    </select>
+                    <select id="amount" class="input-style">
+                        <option value="10.000đ">10,000đ</option>
+                        <option value="20.000đ">20,000đ</option>
+                        <option value="50.000đ">50,000đ</option>
+                        <option value="100.000đ">100,000đ</option>
+                        <option value="200.000đ">200,000đ</option>
+                        <option value="500.000đ">500,000đ</option>
+                    </select>
+                    <div class="row-2">
+                        <input type="text" id="game_user" class="input-style" placeholder="Name Game">
+                        <input type="text" id="linkfb" class="input-style" placeholder="Link Facebook">
+                    </div>
+                    <input type="text" id="serial" class="input-style" placeholder="Số Serial">
+                    <input type="text" id="pin" class="input-style" placeholder="Mã thẻ">
+                    <div class="donate-msg"
+                        style="background: rgba(255, 77, 77, 0.1); border-left: 3px solid #ff0000; color: #f83030; margin-bottom: 10px;">
+                        LƯU Ý: SAI NHÀ MẠNG + MỆNH GIÁ = MẤT THẺ</div>
+                    <button class="btn-submit" onclick="sendToTele()">GỬI THẺ NGAY</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-history" class="main-tab-content hidden">
+        <div class="main" style="display: block;">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 20px;"><i class="fas fa-history"></i>
+                LỊCH SỬ GẦN ĐÂY
+            </h2>
+            <div style="overflow-x: auto;">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th id="totalMoney" style="color:#00ffcc;">Tổng: 0đ | 0 giao dịch</th>
+                            <th></th>
+                            <th></th>
+                            <th colspan="2" style="text-align:right;">
+                                <div class="filter-mini">
+                                    <input type="date" id="startDate">
+                                    <input type="date" id="endDate">
+                                    <button onclick="filterByDate()">Lọc</button>
+                                    <button onclick="resetFilter()">↺</button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Tên</th>
+                            <th>Hình thức</th>
+                            <th>Mệnh giá</th>
+                            <th>Thời gian</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chonggname08</td>
+                            <td>Chuyển khoản</td>
+                            <td>100.000đ</td>
+                            <td>10/04/2026 13:27</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Chonggname08</td>
+                            <td>Chuyển khoản</td>
+                            <td>50.000đ</td>
+                            <td>09/04/2026 22:43</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Chonggname08</td>
+                            <td>Chuyển khoản</td>
+                            <td>50.000đ</td>
+                            <td>09/04/2026 18:30</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>LightPosiden</td>
+                            <td>Chuyển khoản</td>
+                            <td>100.000đ</td>
+                            <td>09/04/2026 14:15</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Chonggname08</td>
+                            <td>Chuyển khoản</td>
+                            <td>20.000đ</td>
+                            <td>09/04/2026 12:53</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>DgaVN</td>
+                            <td>Chuyển khoản</td>
+                            <td>50.000đ</td>
+                            <td>03/04/2026 10:23</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>.dd50337</td>
+                            <td>Chuyển khoản</td>
+                            <td>30.000đ</td>
+                            <td>28/03/2026 11:19</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Zarus_MC</td>
+                            <td>Chuyển khoản</td>
+                            <td>20.000đ</td>
+                            <td>22/03/2026 15:50</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Vuongkogay</td>
+                            <td>Viettel</td>
+                            <td>20.000đ</td>
+                            <td>22/03/2026 12:31</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Vuongkogay</td>
+                            <td>Viettel</td>
+                            <td>20.000đ</td>
+                            <td>22/03/2026 12:30</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Zarus_MC</td>
+                            <td>Chuyển Khoản</td>
+                            <td>20.000đ</td>
+                            <td>20/03/2026 16:07</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Zarus_MC</td>
+                            <td>Chuyển Khoản</td>
+                            <td>50.000đ</td>
+                            <td>19/03/2026 19:27</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>MosiMosi</td>
+                            <td>Chuyển Khoản</td>
+                            <td>250.000đ</td>
+                            <td>16/03/2026 18:59</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>huhuhuhu</td>
+                            <td>Chuyển Khoản</td>
+                            <td>50.000đ</td>
+                            <td>14/03/2026 19:37</td> <!-- thêm -->
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Paidcomet2158</td>
+                            <td>Vinaphone</td>
+                            <td>50.000đ</td>
+                            <td>14/03/2026 11:38</td> <!-- thêm -->
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Mobifone</td>
+                            <td>50.000đ</td>
+                            <td>12/03/2026 20:04</td> <!-- thêm -->
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Viettel</td>
+                            <td>20.000đ</td>
+                            <td>11/03/2026 20:11</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Chicheo</td>
+                            <td>Viettel</td>
+                            <td>50.000đ</td>
+                            <td>11/03/2026 19:29</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Viettel</td>
+                            <td>50.000đ</td>
+                            <td>10/03/2026 21:11</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>HNenMixCocnut</td>
+                            <td>Viettel</td>
+                            <td>50.000đ</td>
+                            <td>10/03/2026 15:10</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>DimplyWord8750</td>
+                            <td>Chuyển Khoản</td>
+                            <td>100.000đ</td>
+                            <td>05/03/2026 16:24</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Hoseki</td>
+                            <td>Viettel</td>
+                            <td>50.000đ</td>
+                            <td>01/03/2026 16:27</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Viettel</td>
+                            <td>50.000đ</td>
+                            <td>24/02/2026 16:40</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Viettel</td>
+                            <td>100.000đ</td>
+                            <td>20/02/2026 10:57</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>CamHang</td>
+                            <td>Mobifone</td>
+                            <td>100.000đ</td>
+                            <td>17/02/2026 13:55</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Viettel</td>
+                            <td>100.000đ</td>
+                            <td>15/02/2026 16:01</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Viettel</td>
+                            <td>50.000đ</td>
+                            <td>09/02/2026 15:11</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>TranMinhNhat</td>
+                            <td>Chuyển Khoản</td>
+                            <td>50.000đ</td>
+                            <td>05/01/2026 15:55</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Ẩn Danh</td>
+                            <td>Chuyển Khoản</td>
+                            <td>30.000đ</td>
+                            <td>05/01/2026 09:48</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Naomi Khoi</td>
+                            <td>Viettel</td>
+                            <td>50.000đ</td>
+                            <td>23/11/2025 18:34</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="pagination">
+                    <button onclick="prevPage()">⬅</button>
+                    <span id="pageInfo">Trang 1</span>
+                    <button onclick="nextPage()">➡</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-guide" class="main-tab-content hidden">
+        <div class="main"
+            style="flex-direction: column; text-align: center; justify-content: center; min-height: 350px;">
+            <h2 style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-book"></i> HƯỚNG DẪN DONATE</h2>
+            <div style="text-align: left; max-width: 500px; margin: 0 auto; line-height: 1.8;">
+                <p>✅ <b>Bước 1:</b> Chọn hình thức Chuyển khoản hoặc Thẻ cào.</p>
+                <p>✅ <b>Bước 2:</b> Nếu nạp thẻ, hãy nhập đúng <b>Seri</b> và <b>Mã thẻ</b>.</p>
+                <p>✅ <b>Bước 3:</b> Nhập tên Game và Link FB để Admin liên hệ.</p>
+                <p>✅ <b>Bước 4:</b> Bấm gửi và chờ 1-5 phút để hệ thống xử lý.</p>
+                <p style="color: #ff4d4d; font-weight: bold; margin-top: 10px;">⚠️ Lưu ý: Nhập sai mệnh giá thẻ cào sẽ
+                    bị mất thẻ!</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-about" class="main-tab-content hidden">
+        <div class="main"
+            style="flex-direction: column; text-align: center; justify-content: center; min-height: 350px;">
+            <h2 style="color: #ff4fd8; margin-bottom: 15px;">GIỚI THIỆU</h2>
+            <div class="avatar-wrapper" style="width: 100px; height: 100px;">
+                <div class="avatar"><img src="https://i.ibb.co/8gqJHJbf/kenn.jpg"></div>
+            </div>
+            <p style="margin-top: 20px; font-style: italic;">"Xin chào tui là Ken đây. Tui là 1 sinh viên ngành CNTT,
+                <br>rất đam mê công nghệ mà được cái là ngu công nghệ:)
+                <br> Tui sẽ luôn cố gắng phát triển để mang lại 1 trải nghiệm <br> tốt nhất cho anh em. Những sự ủng hộ
+                của anh em là 1 sự <br> động lực rất lớn dành cho tuiii"
+            </p>
+            <p style="margin-top: 10px; color: var(--primary);">Kí tên: Ken</p>
+        </div>
+    </div>
+
+    <div id="qrModal" class="modal" onclick="closeQR()"><img id="qrZoom" src=""></div>
+    <div id="toast" class="toast">Đã copy số tài khoản!</div>
+
+    <audio id="bgMusic" autoplay loop muted>
+        <source src="nenqr.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-player">
+        <div class="music-avatar"><img src="https://i.ibb.co/ZRrz3xv7/avatargcmc.png"></div>
+        <div class="music-info">
+            <div class="music-title">Chill Oãii</div>
+            <div class="music-sub">Nghe tí nhạc....</div>
+        </div>
+        <div class="music-icon">⏸</div>
     </div>
 
     <script>
-        // Chuyển Tab
-        function openTab(evt, tabName) {
-            const contents = document.querySelectorAll(".tab-content");
-            const navs = document.querySelectorAll(".nav-item");
-
-            contents.forEach(c => c.classList.remove("active"));
-            navs.forEach(n => n.classList.remove("active"));
-
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
+        // CHUYỂN TRANG MENU CHÍNH
+        function switchMainTab(id, el) {
+            document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("active"));
+            el.classList.add("active");
+            document.querySelectorAll(".main-tab-content").forEach(p => p.classList.add("hidden"));
+            document.getElementById(id).classList.remove("hidden");
         }
 
-        // Lấy dữ liệu Server
-        async function updateServerStatus() {
-            try {
-                const res = await fetch('https://api.mcstatus.io/v2/status/java/160.25.232.39:25793');
-                const data = await res.json();
+        // CHUYỂN TAB BANK/CARD
+        function showTab(type, el) {
+            document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+            el.classList.add("active");
+            document.getElementById("bank").classList.add("hidden");
+            document.getElementById("card").classList.add("hidden");
+            document.getElementById(type).classList.remove("hidden");
+        }
 
-                const sIcon = document.getElementById('status-icon');
-                const sText = document.getElementById('server-status');
+        function openQR(src) { document.getElementById("qrModal").style.display = "flex"; document.getElementById("qrZoom").src = src; }
+        function closeQR() { document.getElementById("qrModal").style.display = "none"; }
 
-                if (data.online) {
-                    sText.innerText = "ONLINE"; sText.style.color = "var(--primary)";
-                    sIcon.style.color = "var(--primary)";
-                    document.getElementById('player-count').innerText = `${data.players.online} / ${data.players.max}`;
-                    document.getElementById('server-version').innerText = data.version.name_clean;
-                    document.getElementById('motd-text').innerText = data.motd.clean;
+        function copySTK() {
+            let text = document.getElementById("stk").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                let toast = document.getElementById("toast");
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 2000);
+            });
+        }
 
-                    const list = document.getElementById('player-list');
-                    if (data.players.list?.length > 0) {
-                        list.innerHTML = data.players.list.map(p => `
-                            <div class="player-tag">
-                                <img src="https://mc-heads.net/avatar/${p.uuid}/20" class="player-head">
-                                <span>${p.name_clean}</span>
-                            </div>`).join('');
-                    } else {
-                        list.innerHTML = '<span style="color: gray; font-style: italic;">Không có ai online</span>';
-                    }
+        // GỬI TELEGRAM
+        let isSending = false;
+        function sendToTele() {
+            if (isSending) return;
+            isSending = true;
+
+            const user = document.getElementById('game_user').value;
+            const pin = document.getElementById('pin').value;
+            const serial = document.getElementById('serial').value;
+            const telco = document.getElementById('telco').value;
+            const amount = document.getElementById('amount').value;
+            const linkfb = document.getElementById('linkfb').value;
+
+            if (!user || !pin || !serial) {
+                isSending = false;
+                return alert("Vui lòng nhập đầy đủ thông tin thẻ!");
+            }
+
+            const msg1 = `🔔 ĐƠN THẺ MỚI\n👤 Game: ${user}\n🔗 FB: ${linkfb}\n💳 Loại: ${telco}\n💰 Giá: ${amount}`;
+            const msg2 = `📌 Mã thẻ: ${pin}`;
+            const msg3 = `🔢 Seri: ${serial}`;
+
+            const botToken = "8580960114:AAGRGVdml5j5o0HR1wDfFpcrwgwxsd502FM";
+            const chatId = "7402989200";
+
+            function sendMsg(text) {
+                return fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`, { mode: "no-cors" });
+            }
+
+            sendMsg(msg1);
+            setTimeout(() => sendMsg(msg2), 300);
+            setTimeout(() => sendMsg(msg3), 600);
+
+            alert("✅ Đã gửi đơn thẻ! Vui lòng chờ duyệt.");
+            document.getElementById('game_user').value = "";
+            document.getElementById('pin').value = "";
+            document.getElementById('serial').value = "";
+            document.getElementById('linkfb').value = "";
+
+            setTimeout(() => { isSending = false; }, 3000);
+        }
+
+        // XỬ LÝ NHẠC
+        document.addEventListener("DOMContentLoaded", () => {
+            const music = document.getElementById("bgMusic");
+            const avatar = document.querySelector(".music-avatar");
+            music.volume = 0.4;
+
+            function startMusic() { music.muted = false; music.play().catch(() => { }); }
+            document.addEventListener("click", startMusic, { once: true });
+
+            if (avatar) {
+                music.onplay = () => avatar.style.animationPlayState = "running";
+                music.onpause = () => avatar.style.animationPlayState = "paused";
+            }
+        });
+        function calcTotal() {
+            let total = 0;
+            let count = 0;
+
+            document.querySelectorAll(".history-table tbody tr").forEach(row => {
+                let moneyText = row.children[2]?.innerText || "0";
+                let number = parseInt(moneyText.replace(/\D/g, "")) || 0;
+
+                total += number;
+                count++;
+            });
+
+            document.getElementById("totalMoney").innerText =
+                "Tổng: " + total.toLocaleString() + "đ | " + count + " lần giao dịch";
+        }
+
+        calcTotalFiltered();
+        function parseDate(str) {
+            // format: dd/mm/yyyy hh:mm
+            let parts = str.split(" ");
+            let dateParts = parts[0].split("/");
+            return new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+        }
+
+        function filterByDate() {
+            let start = document.getElementById("startDate").value;
+            let end = document.getElementById("endDate").value;
+
+            if (!start || !end) {
+                alert("Chọn đầy đủ ngày!");
+                return;
+            }
+
+            let startDate = new Date(start);
+            let endDate = new Date(end);
+
+            document.querySelectorAll(".history-table tbody tr").forEach(row => {
+                let timeText = row.children[3].innerText;
+                let rowDate = parseDate(timeText);
+
+                if (rowDate >= startDate && rowDate <= endDate) {
+                    row.classList.remove("filtered-out");
                 } else {
-                    sText.innerText = "OFFLINE"; sText.style.color = "#ff6b6b";
-                    sIcon.style.color = "#ff6b6b";
+                    row.classList.add("filtered-out");
                 }
-            } catch (e) { console.error("Lỗi API"); }
+            });
+
+            currentPage = 1;
+            showPage(currentPage);
+            calcTotalFiltered();
         }
 
-        function copyIP() {
-            navigator.clipboard.writeText("gaconmc.ddns.net:25793");
-            alert("Đã sao chép IP!");
+        function calcTotalFiltered() {
+            let total = 0;
+            let count = 0;
+
+            document.querySelectorAll(".history-table tbody tr").forEach(row => {
+                if (row.classList.contains("filtered-out")) return;
+
+                let moneyText = row.children[2]?.innerText || "0";
+                let number = parseInt(moneyText.replace(/\D/g, "")) || 0;
+
+                total += number;
+                count++;
+            });
+
+            document.getElementById("totalMoney").innerText =
+                "Tổng: " + total.toLocaleString() + "đ | " + count + " giao dịch";
         }
 
-        updateServerStatus();
-        setInterval(updateServerStatus, 30000);
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
+        function resetFilter() {
+            document.querySelectorAll(".history-table tbody tr").forEach(row => {
+                row.classList.remove("filtered-out");
+            });
+
+            document.getElementById("startDate").value = "";
+            document.getElementById("endDate").value = "";
+
+            currentPage = 1;
+            showPage(currentPage);
+            calcTotal();
+        }
+        let currentPage = 1;
+        const rowsPerPage = 10;
+
+        function showPage(page) {
+            const allRows = document.querySelectorAll(".history-table tbody tr");
+
+            const rows = Array.from(allRows)
+                .filter(row => !row.classList.contains("filtered-out"));
+
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+
+            allRows.forEach(row => row.style.display = "none");
+
+            rows.slice(start, end).forEach(row => {
+                row.style.display = "";
+            });
+
+            document.getElementById("pageInfo").innerText = "Trang " + page;
         }
 
-        // Sửa lại hàm openTab để tự đóng menu sau khi chọn luật
-        function openTab(evt, tabName) {
-            const contents = document.querySelectorAll(".tab-content");
-            const navs = document.querySelectorAll(".nav-item, .nav-sub-item");
+        function nextPage() {
+            const rows = Array.from(document.querySelectorAll(".history-table tbody tr"))
+                .filter(row => !row.classList.contains("filtered-out"));
 
-            contents.forEach(c => c.classList.remove("active"));
-            navs.forEach(n => n.classList.remove("active"));
+            const maxPage = Math.ceil(rows.length / rowsPerPage);
 
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-
-            // Nếu đang ở mobile, chọn xong thì tự đóng menu sidebar
-            if (window.innerWidth <= 900) {
-                toggleSidebar();
+            if (currentPage < maxPage) {
+                currentPage++;
+                showPage(currentPage);
             }
         }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+
+        // chạy lần đầu
+        document.addEventListener("DOMContentLoaded", () => {
+            showPage(currentPage);
+        });
     </script>
+    <div class="footer">
+        © 2026 Love with Ken . Được thiết kế<br>
+        và phát triển bở <span>Ken❤️</span>
+    </div>
 </body>
 
 </html>
