@@ -783,7 +783,9 @@
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th id="totalMoney" style="color:#00ffcc;">Tổng: 0đ | 0 giao dịch</th>
+                            <th id="totalMoney"
+                                style="color:#7fefff; font-weight:bold; text-shadow:0 0 5px rgba(127,239,255,0.5);">
+                                Tổng: 0đ | 0 lần giao dịch</th>
                             <th></th>
                             <th></th>
                             <th colspan="2" style="text-align:right;">
@@ -804,6 +806,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>Chonggname08</td>
+                            <td>Chuyển khoản</td>
+                            <td>100.000đ</td>
+                            <td>10/04/2026 20:05</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
                         <tr>
                             <td>Thanhthuy1602</td>
                             <td>Chuyển khoản</td>
@@ -1176,8 +1185,11 @@
                 count++;
             });
 
-            document.getElementById("totalMoney").innerText =
-                "Tổng: " + total.toLocaleString() + "đ | " + count + " lần giao dịch";
+            document.getElementById("totalMoney").innerHTML =
+                '<span style="color:#00ffcc; text-shadow:0 0 5px #00ffcc">Tổng:</span> ' +
+                '<span style="color:#7fefff; font-weight:bold">' + total.toLocaleString() + 'đ</span><br>' +
+                '<span style="color:#00ffcc; text-shadow:0 0 5px #00ffcc">Số lần giao dịch:</span> ' +
+                '<span style="color:#7fefff; font-weight:bold">' + count + '</span>';
         }
 
         calcTotalFiltered();
@@ -1230,8 +1242,11 @@
                 count++;
             });
 
-            document.getElementById("totalMoney").innerText =
-                "Tổng: " + total.toLocaleString() + "đ | " + count + " giao dịch";
+            document.getElementById("totalMoney").innerHTML =
+                '<span style="color:#00ffcc; text-shadow:0 0 5px #00ffcc">Tổng:</span> ' +
+                '<span style="color:#7fefff; font-weight:bold">' + total.toLocaleString() + 'đ</span><br>' +
+                '<span style="color:#00ffcc; text-shadow:0 0 5px #00ffcc">Số lần giao dịch:</span> ' +
+                '<span style="color:#7fefff; font-weight:bold">' + count + '</span>';
         }
 
         function resetFilter() {
