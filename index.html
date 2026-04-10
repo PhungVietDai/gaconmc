@@ -1173,7 +1173,7 @@
                 "Tổng: " + total.toLocaleString() + "đ | " + count + " lần giao dịch";
         }
 
-        calcTotal();
+        calcTotalFiltered();
         function parseDate(str) {
             // format: dd/mm/yyyy hh:mm
             let parts = str.split(" ");
@@ -1214,7 +1214,7 @@
             let count = 0;
 
             document.querySelectorAll(".history-table tbody tr").forEach(row => {
-                if (row.style.display === "none") return;
+                if (row.classList.contains("filtered-out")) return;
 
                 let moneyText = row.children[2]?.innerText || "0";
                 let number = parseInt(moneyText.replace(/\D/g, "")) || 0;
@@ -1261,7 +1261,9 @@
         }
 
         function nextPage() {
-            const rows = document.querySelectorAll(".history-table tbody tr");
+            const rows = Array.from(document.querySelectorAll(".history-table tbody tr"))
+                .filter(row => !row.classList.contains("filtered-out"));
+
             const maxPage = Math.ceil(rows.length / rowsPerPage);
 
             if (currentPage < maxPage) {
