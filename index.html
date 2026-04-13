@@ -668,6 +668,103 @@
         .filtered-out {
             display: none !important;
         }
+
+        .history-table tbody {
+            display: block;
+            min-height: 380px;
+            /* chỉnh theo ý, đủ chứa 10 dòng */
+        }
+
+        .history-table thead,
+        .history-table tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .main {
+            min-height: 600px;
+        }
+
+        .filter-mini {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: flex-end;
+            /* 👈 đẩy về bên phải giống hiện tại */
+            flex-wrap: nowrap;
+
+            width: 100%;
+            max-width: none;
+            /* ❌ bỏ giới hạn 500px */
+        }
+
+        .filter-mini input {
+            flex: 1;
+            /* 👈 tự giãn */
+            min-width: 120px;
+        }
+
+        #searchName {
+            flex: 1.5;
+            /* ô tìm tên dài hơn */
+        }
+
+        .filter-mini button {
+            white-space: nowrap;
+            /* không xuống dòng chữ */
+        }
+
+        .filter-mini input:focus {
+            border-color: #00f2fe;
+            box-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+        }
+
+        /* nút lọc */
+        .filter-mini button:first-of-type {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* nút reset */
+        .filter-mini button:last-of-type {
+            background: linear-gradient(135deg, #ff4fd8, #ff6a6a);
+            color: white;
+        }
+
+        /* hover */
+        .filter-mini button:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        #searchName {
+            flex: 1.5;
+        }
+
+        #startDate,
+        #endDate {
+            flex: 1;
+        }
+
+        .filter-mini input {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            transition: 0.3s;
+        }
+
+        .filter-mini input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .filter-mini input:focus {
+            border-color: #00f2fe;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+            background: rgba(0, 0, 0, 0.6);
+        }
     </style>
 </head>
 
@@ -790,9 +887,10 @@
                             <th></th>
                             <th colspan="2" style="text-align:right;">
                                 <div class="filter-mini">
+                                    <input type="text" id="searchName" placeholder="🔍 Tên người nạp">
                                     <input type="date" id="startDate">
                                     <input type="date" id="endDate">
-                                    <button onclick="filterByDate()">Lọc</button>
+                                    <button onclick="applyFilter()">Lọc</button>
                                     <button onclick="resetFilter()">↺</button>
                                 </div>
                             </th>
@@ -806,6 +904,27 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>Chonggname08</td>
+                            <td>Chuyển khoản</td>
+                            <td>270.000đ</td>
+                            <td>13/04/2026 12:51</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>Chonggname08</td>
+                            <td>Chuyển khoản</td>
+                            <td>120.000đ</td>
+                            <td>12/04/2026 21:27</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
+                        <tr>
+                            <td>.Tisxihiiuu</td>
+                            <td>Chuyển khoản</td>
+                            <td>50.000đ</td>
+                            <td>12/04/2026 20:52</td>
+                            <td class="status-success">Thành công</td>
+                        </tr>
                         <tr>
                             <td>Chonggname08</td>
                             <td>Chuyển khoản</td>
@@ -1214,23 +1333,27 @@
             return new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
         }
 
-        function filterByDate() {
+        function applyFilter() {
             let start = document.getElementById("startDate").value;
             let end = document.getElementById("endDate").value;
+            let keyword = document.getElementById("searchName").value.toLowerCase();
 
-            if (!start || !end) {
-                alert("Chọn đầy đủ ngày!");
-                return;
-            }
-
-            let startDate = new Date(start);
-            let endDate = new Date(end);
+            let startDate = start ? new Date(start) : null;
+            let endDate = end ? new Date(end) : null;
 
             document.querySelectorAll(".history-table tbody tr").forEach(row => {
+                if (row.classList.contains("fake-row")) return;
+
+                let name = row.children[0].innerText.toLowerCase();
                 let timeText = row.children[3].innerText;
                 let rowDate = parseDate(timeText);
 
-                if (rowDate >= startDate && rowDate <= endDate) {
+                let matchName = !keyword || name.includes(keyword);
+                let matchDate =
+                    (!startDate || rowDate >= startDate) &&
+                    (!endDate || rowDate <= endDate);
+
+                if (matchName && matchDate) {
                     row.classList.remove("filtered-out");
                 } else {
                     row.classList.add("filtered-out");
@@ -1270,6 +1393,7 @@
 
             document.getElementById("startDate").value = "";
             document.getElementById("endDate").value = "";
+            document.getElementById("searchName").value = "";
 
             currentPage = 1;
             showPage(currentPage);
