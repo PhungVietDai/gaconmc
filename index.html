@@ -1723,6 +1723,15 @@
         © 2026 Love with Ken . Được thiết kế<br>
         và phát triển bở <span>Ken❤️</span>
     </div>
+    <script>
+document.addEventListener("contextmenu", e => e.preventDefault());
+</script>
+<script>
+document.onkeydown = function(e) {
+   /*if (e.keyCode == 123) return false; // F12 */
+  if (e.ctrlKey && e.key === 'u') return false; // Ctrl+U
+};
+</script>
 </body>
 
 </html>
